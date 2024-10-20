@@ -32,7 +32,8 @@ This project is a multi-threaded Spring Boot application designed to process upl
 
 ### Installation
 
-API Endpoints
+API Endpoints:  
+
 Upload Files
 Endpoint: POST /api/upload
 Description: Upload customer and account files.
