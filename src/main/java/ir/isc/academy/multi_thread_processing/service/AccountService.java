@@ -6,16 +6,11 @@ import ir.isc.academy.multi_thread_processing.model.ErrorCode;
 import ir.isc.academy.multi_thread_processing.repository.AccountRepo;
 import ir.isc.academy.multi_thread_processing.utility.CryptoUtils;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
-@Slf4j
 @RequiredArgsConstructor
 @Service
 public class AccountService {
@@ -84,7 +79,6 @@ public class AccountService {
         return Arrays.asList("1", "2", "3").contains(type);
     }
 
-
     private Account createAccount(String[] record) throws Exception {
         return new Account(
                 null, //id
@@ -97,7 +91,4 @@ public class AccountService {
                 new BigDecimal(CryptoUtils.decrypt(record[6])) //accountBalance
         );
     }
-
-
-
 }

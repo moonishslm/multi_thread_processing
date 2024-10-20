@@ -1,4 +1,8 @@
 package ir.isc.academy.multi_thread_processing.model;
+
+import lombok.Getter;
+
+@Getter
 public enum ErrorCode {
     BALANCE_EXCEEDS_LIMIT("1", "Account balance exceeds account limit"),
     INVALID_ACCOUNT_TYPE("2", "Invalid account type"),
@@ -15,6 +19,4 @@ public enum ErrorCode {
         this.description = description;
     }
 
-    public String getCode() { return code; }
-    public String getDescription() { return description; }
 }

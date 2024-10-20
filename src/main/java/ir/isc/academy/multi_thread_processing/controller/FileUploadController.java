@@ -48,7 +48,7 @@ public class FileUploadController {
         CompletableFuture.allOf(accountFuture, customerFuture)
                 .thenRun(() -> {
                     errorLogger.logAllErrors();
-                    processingCompleted = true; // Set flag to true after completion
+                    processingCompleted = true;
                 })
                 .join();
         return ResponseEntity.ok("Files processed successfully");

@@ -9,8 +9,6 @@ import java.time.LocalDate;
 @Data
 @Entity
 @Table(name = "accounts")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Account {

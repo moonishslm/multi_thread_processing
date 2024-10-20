@@ -10,7 +10,6 @@ import ir.isc.academy.multi_thread_processing.utility.CryptoUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -46,7 +45,6 @@ public class ReportGenerationService {
     private void saveToJsonFile(List<ReportDto> data) {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
         File jsonFile = new File("report_" + timestamp + ".json");
-
         try {
             objectMapper.registerModule(new JavaTimeModule());
             objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
@@ -59,7 +57,6 @@ public class ReportGenerationService {
     private void saveToXmlFile(List<ReportDto> data) {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
         File xmlFile = new File("report_" + timestamp + ".xml");
-
         try {
             XmlMapper xmlMapper = new XmlMapper();
             xmlMapper.registerModule(new JavaTimeModule());

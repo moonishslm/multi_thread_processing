@@ -2,7 +2,6 @@ package ir.isc.academy.multi_thread_processing.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 

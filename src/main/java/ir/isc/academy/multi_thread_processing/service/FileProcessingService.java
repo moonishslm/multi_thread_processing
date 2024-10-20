@@ -35,7 +35,6 @@ public class FileProcessingService {
             }, executor);
             futures.add(future);
         }
-
         CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
         executor.shutdown();
     }

@@ -12,8 +12,7 @@ public class ReportGenerationScheduler {
     final FileUploadController fileUploadController;
     final ReportGenerationService reportGenerationService;
 
-
-    @Scheduled(fixedDelay = 5000) // Run every 5 seconds
+    @Scheduled(fixedDelay = 5000)
     public void scheduleReportGeneration() {
         if (fileUploadController.isProcessingCompleted()) {
             reportGenerationService.generateReports();

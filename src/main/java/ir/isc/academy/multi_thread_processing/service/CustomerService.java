@@ -6,14 +6,10 @@ import ir.isc.academy.multi_thread_processing.model.ErrorLogDto;
 import ir.isc.academy.multi_thread_processing.repository.CustomerRepo;
 import ir.isc.academy.multi_thread_processing.utility.CryptoUtils;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-@Slf4j
 @RequiredArgsConstructor
 @Service
 public class CustomerService {
@@ -88,6 +84,4 @@ public class CustomerService {
                 LocalDate.parse(record[7]) //customerBirthDate
         );
     }
-
-
 }
