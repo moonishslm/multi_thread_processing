@@ -35,12 +35,15 @@ This project is a multi-threaded Spring Boot application designed to process upl
 API Endpoints:  
 
 Upload Files
-Endpoint: POST /api/upload
-Description: Upload customer and account files.
+Endpoint:POST /api/upload  
+
+Description: Upload customer and account files.  
+
 Request Body:
 accountFile: Multipart file containing account data.
-customerFile: Multipart file containing customer data.
-Error Logs
+customerFile: Multipart file containing customer data.  
+
+Error Logs:
 Invalid entries are logged in a JSON file named error_log.json located in the root directory of the project.
 Scheduled Reports
 The application generates reports every hour (or as configured) in both JSON (customer_account_report.json) and XML (customer_account_report.xml) formats, located in the root directory.
