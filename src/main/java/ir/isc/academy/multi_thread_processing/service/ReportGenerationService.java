@@ -5,9 +5,9 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import ir.isc.academy.multi_thread_processing.model.ReportDto;
+import ir.isc.academy.multi_thread_processing.repository.ReportRepo;
 import ir.isc.academy.multi_thread_processing.utility.CryptoUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +20,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ReportGenerationService {
-    private final JdbcTemplate jdbcTemplate;
+    private final ReportRepo reportRepo;
     private final ObjectMapper objectMapper;
 
     @Transactional(readOnly = true)
@@ -31,27 +31,16 @@ public class ReportGenerationService {
     }
 
     private List<ReportDto> fetchDataFromDatabase() {
-        String sql = "SELECT c.customer_id, c.customer_name, c.customer_surname, c.customer_national_id, " +
-                "a.account_number, a.account_open_date, a.account_balance " +
-                "FROM customers c JOIN accounts a ON a.account_customer_id = c.customer_id " +
-                "WHERE a.account_balance > 1000";
-
-        return jdbcTemplate.query(sql, (rs, rowNum) -> {
-            ReportDto report = new ReportDto();
-            report.setCustomerId(rs.getString("customer_id"));
-            report.setCustomerName(rs.getString("customer_name"));
-            report.setCustomerSurname(rs.getString("customer_surname"));
-            report.setCustomerNationalId(rs.getString("customer_national_id"));
-
+        List<ReportDto> reports = reportRepo.fetchReports();
+        reports.forEach(report -> {
             try {
-                report.setAccountNumber(CryptoUtils.encrypt(rs.getString("account_number")));
-                report.setAccountBalance(CryptoUtils.encrypt(rs.getBigDecimal("account_balance").toString()));
+                report.setAccountNumber(CryptoUtils.encrypt(report.getAccountNumber()));
+                report.setAccountBalance(CryptoUtils.encrypt(report.getAccountBalance()));
             } catch (Exception e) {
                 throw new RuntimeException("Encryption error", e);
             }
-            report.setAccountOpenDate(rs.getDate("account_open_date").toLocalDate());
-            return report;
         });
+        return reports;
     }
 
     private void saveToJsonFile(List<ReportDto> data) {
